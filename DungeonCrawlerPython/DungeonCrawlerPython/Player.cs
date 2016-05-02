@@ -4,17 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DungeonCrawlerPython.Weapons;
+using DungeonCrawlerPython.Shields;
+
 
 namespace DungeonCrawlerPython
 {
     class Player
     {
+        #region fields
         int maxHealth;
         int health;
         bool blocking;
-        int blockAmount;
-        Weapons.Weapon weapon;
+        Weapon weapon;
+        Shield shield;
+        #endregion
 
+        #region properties
         public int Health
         {
             get
@@ -41,12 +46,27 @@ namespace DungeonCrawlerPython
             }
         }
 
+        public Shield Shield
+        {
+            get
+            {
+                return shield;
+            }
+
+            set
+            {
+                shield = value;
+            }
+        }
+        #endregion
+
         public Player(int health)
         {
             this.maxHealth = health;
             this.health = maxHealth;
 
-            weapon = new Weapons.Weapon();
+            weapon = new Weapon();
+            shield = new Shield();
         }
 
         public int Attack()
@@ -62,14 +82,11 @@ namespace DungeonCrawlerPython
 
         public void TakeDamage(int damage)
         {
-            if (blocking && blockAmount < damage)
+            if (blocking)
             {
-                health -= (damage - blockAmount);
+                health -= shield.Block(damage);
             }
-            else if (!blocking)
-            {
-                health -= damage;
-            }
+            else health -= damage;
         }
 
         public void Heal(int healAmount)

@@ -29,8 +29,6 @@ namespace DungeonCrawlerPython
                 Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Weapon.Damage, p.Health));
                 Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
 
-
-
                 string input = Console.ReadLine();
 
                 switch (input.ToLower())
@@ -74,10 +72,9 @@ namespace DungeonCrawlerPython
 
             while (fighting)
             {
-                Console.Clear();
-                Console.WriteLine("You have " + p.Health + " health");
+                Console.WriteLine("\nYou have " + p.Health + " health");
                 Console.WriteLine("The " + m.EnemyType + " has " + m.Health + " health");
-                Console.WriteLine("1. Attack\n2. Flee");
+                Console.WriteLine("1. Attack\n2. Block\n3. Flee");
 
                 string input = Console.ReadLine();
 
@@ -89,10 +86,16 @@ namespace DungeonCrawlerPython
                         break;
 
                     case "2":
+                    case "blocking":
+                        p.Block();
+                        break;
+                    case "3":
                     case "flee":
                         flee = true;
                         break;
                 }
+
+                Console.Clear();
 
                 if (m.Health <= 0 && flee != true)
                 {

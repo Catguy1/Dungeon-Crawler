@@ -8,23 +8,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonCrawlerPython.Weapons
+namespace DungeonCrawlerPython.Shields
 {
-    class Weapon
+    class Shield
     {
         dynamic scope;
         dynamic pFunc;
 
-        public int Damage
+        public int BlockValue
         {
             get
             {
-                pFunc = scope.GetVariable("GetDamage");
+                pFunc = scope.GetVariable("GetBlock");
                 return pFunc(scope);
             }
         }
 
-        public Weapon()
+        public Shield()
         {
             LoadRandomFile();
 
@@ -50,17 +50,18 @@ namespace DungeonCrawlerPython.Weapons
 
             scope = eng.CreateScope();
 
-            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Weapons\", "*.py");
+            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Shields\", "*.py");
 
             int e = rnd.Next(files.Length);
 
             eng.ExecuteFile(files[e], scope);
         }
 
-        public int Attack()
+        public int Block(int damage)
         {
-            pFunc = scope.GetVariable("Attack");
-            return pFunc(scope);
+            pFunc = scope.GetVariable("Block");
+
+            return pFunc(scope, damage);
         }
     }
 }
