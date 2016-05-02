@@ -10,7 +10,7 @@ namespace DungeonCrawlerPython
 {
     class Program
     {
-        static Player p = new Player(10, 100);
+        static Player p = new Player(100);
         static bool playing = true;
 
         static void Main(string[] args)
@@ -24,8 +24,12 @@ namespace DungeonCrawlerPython
             {
                 Console.Clear();
 
-                Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Damage, p.Health));
+                Weapons.Weapon w = new Weapons.Weapon();
+
+                Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Weapon.Damage, p.Health));
                 Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
+
+
 
                 string input = Console.ReadLine();
 
@@ -58,14 +62,13 @@ namespace DungeonCrawlerPython
 
         static void Rest()
         {
-            p.TakeDamage(-25);
+            p.Heal(100);
         }
 
         static void Battle()
         {
             bool flee = false;
             bool fighting = true;
-
 
             Enemies.Enemy m = new Enemies.Enemy();
 

@@ -3,22 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonCrawlerPython.Weapons;
 
 namespace DungeonCrawlerPython
 {
     class Player
     {
         int maxHealth;
-        int damage;
         int health;
-
-        public int Damage
-        {
-            get
-            {
-                return damage;
-            }
-        }
+        bool blocking;
+        int blockAmount;
+        Weapons.Weapon weapon;
 
         public int Health
         {
@@ -33,21 +28,48 @@ namespace DungeonCrawlerPython
             }
         }
 
-        public Player(int damage, int health)
+        public Weapon Weapon
         {
-            this.damage = damage;
+            get
+            {
+                return weapon;
+            }
+
+            set
+            {
+                weapon = value;
+            }
+        }
+
+        public Player(int health)
+        {
             this.maxHealth = health;
             this.health = maxHealth;
+
+            weapon = new Weapons.Weapon();
         }
 
         public int Attack()
         {
-            return damage;
+            blocking = false;
+            return weapon.Attack();
+        }
+
+        public void Block()
+        {
+            blocking = true;
         }
 
         public void TakeDamage(int damage)
         {
-            health -= damage;
+            if (blocking && blockAmount < damage)
+            {
+                health -= (damage - blockAmount);
+            }
+            else if (!blocking)
+            {
+                health -= damage;
+            }
         }
 
         public void Heal(int healAmount)
