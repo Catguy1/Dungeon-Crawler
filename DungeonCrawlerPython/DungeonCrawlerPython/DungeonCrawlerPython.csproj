@@ -597,6 +597,7 @@
     <Content Include="Lib\_weakrefset.py" />
     <Content Include="Lib\__future__.py" />
     <Content Include="Lib\__phello__.foo.py" />
+    <Content Include="PythonScripts\Enemies\EnemyHeavyClass.py" />
     <Content Include="PythonScripts\HighScore_Script.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

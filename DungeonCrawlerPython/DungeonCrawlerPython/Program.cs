@@ -67,7 +67,7 @@ namespace DungeonCrawlerPython
             bool fighting = true;
 
 
-            Enemies.Enemy m = new Enemies.Enemy();
+            Enemies.Enemy m = new Enemies.Enemy(@"C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPython\PythonScripts\Enemies\EnemyHeavyClass.py");
 
             while (fighting)
             {

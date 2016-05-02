@@ -65,6 +65,9 @@ namespace DungeonCrawlerPython.Enemies
         public Enemy(string dest)
         {
             LoadFile(dest);
+
+            pFunc = scope.GetVariable("Initialize");
+            pFunc(scope);
         }
 
         private void LoadFile(string dest)
