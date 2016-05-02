@@ -3,36 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonCrawlerPython.Armors;
 using DungeonCrawlerPython.Weapons;
-using DungeonCrawlerPython.Shields;
-
 
 namespace DungeonCrawlerPython
 {
     class Player
     {
-        #region fields
-        int maxHealth;
         int health;
         bool blocking;
-        Weapon weapon;
-        Shield shield;
-        #endregion
-
-        #region properties
-        public int Health
-        {
-            get
-            {
-                return health;
-            }
-
-            set
-            {
-                health = value;
-            }
-        }
-
+        int blockAmount;
+        
+        Weapons.Weapon weapon;
+        Armors.Armor armor;
+        
         public Weapon Weapon
         {
             get
@@ -46,27 +30,37 @@ namespace DungeonCrawlerPython
             }
         }
 
-        public Shield Shield
+        public Armor Armor
         {
             get
             {
-                return shield;
+                return armor;
             }
 
             set
             {
-                shield = value;
+                armor = value;
             }
         }
-        #endregion
 
-        public Player(int health)
+        public int Health
         {
-            this.maxHealth = health;
-            this.health = maxHealth;
+            get
+            {
+                return health;
+            }
 
-            weapon = new Weapon();
-            shield = new Shield();
+            set
+            {
+                health = value;
+            }
+        }
+
+        public Player()
+        {
+            weapon = new Weapons.Weapon();
+            armor = new Armors.Armor();
+            this.Health = armor.Health;
         }
 
         public int Attack()
@@ -82,20 +76,24 @@ namespace DungeonCrawlerPython
 
         public void TakeDamage(int damage)
         {
-            if (blocking)
+            if (blocking && blockAmount < damage)
             {
-                health -= shield.Block(damage);
+                Health -= (damage - blockAmount);
             }
-            else health -= damage;
+            else if (!blocking)
+            {
+                Health -= damage;
+            }
+            Heal(armor.Ability());
         }
 
         public void Heal(int healAmount)
-        {
-            health += healAmount;
+        {            
+            Health += healAmount;
 
-            if (health > maxHealth)
+            if (Health > armor.Health)
             {
-                health = maxHealth;
+                Health = armor.Health;
             }
         }
     }
