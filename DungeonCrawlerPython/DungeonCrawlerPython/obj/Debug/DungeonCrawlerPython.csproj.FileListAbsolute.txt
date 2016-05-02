@@ -21,4 +21,3 @@ C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPyt
 C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\Microsoft.Scripting.xml
 C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\Microsoft.Scripting.AspNet.xml
 C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\Microsoft.Scripting.Metadata.xml
-C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\Enemies\TestEnemy.py

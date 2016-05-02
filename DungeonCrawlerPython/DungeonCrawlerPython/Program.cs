@@ -10,91 +10,38 @@ namespace DungeonCrawlerPython
 {
     class Program
     {
-        struct Player
-        {
-            int maxHealth;
-            public int attack;
-            public int health;
-
-            public void Init(int attack, int health)
-            {
-                this.attack = attack;
-                this.maxHealth = health;
-                this.health = maxHealth;
-            }
-
-            public int Attack()
-            {
-                return attack;
-            }
-
-            public void TakeDamage(int damage)
-            {
-                health -= damage;
-                if (health > maxHealth)
-                {
-                    health = maxHealth;
-                }
-            }
-        }
-
-        struct Monster
-        {
-            public int attack;
-            public int health;
-
-            public void Init(int a, int h)
-            {
-                attack = a;
-                health = h;
-            }
-
-            public int Attack()
-            {
-                return attack;
-            }
-
-            public void TakeDamage(int damage)
-            {
-                health -= damage;
-            }
-        }
-
-
-        static Player p = new Player();
+        static Player p = new Player(10, 100);
         static bool playing = true;
 
         static void Main(string[] args)
         {
 
-            Enemies.Enemy e = new Enemies.Enemy();
+            //Enemies.Enemy e = new Enemies.Enemy();
 
-            Console.WriteLine("In front of you stands a {0}\nIt has {1} health and {2} attack", e.enemyType, e.health, e.damage);
+            //Console.WriteLine("In front of you stands a {0}\nIt has {1} health and {2} attack", e.enemyType, e.health, e.damage);
 
-            //p.Init(10, 100);
+            while (playing)
+            {
+                Console.Clear();
 
-            //while (playing)
-            //{
-            //    Console.Clear();
+                Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Damage, p.Health));
+                Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
 
-            //    Console.WriteLine("You have " + p.attack + " Attack and " + p.health + " Health");
-            //    Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
+                string input = Console.ReadLine();
 
-            //    string input = Console.ReadLine();
+                switch (input.ToLower())
+                {
+                    case "1":
+                    case "search":
+                        Search();
+                        break;
 
-            //    switch (input.ToLower())
-            //    {
-            //        case "1":
-            //        case "search":
-            //            Search();
-            //            break;
-
-            //        case "2":
-            //        case "rest":
-            //            Rest();
-            //            break;
-            //    }
-            //}
+                    case "2":
+                    case "rest":
+                        Rest();
+                        break;
+                }
+            }
 
             Console.ReadKey();
         }
@@ -103,6 +50,9 @@ namespace DungeonCrawlerPython
 
         static void Search()
         {
+            Console.Clear();
+            Console.WriteLine("Searching");
+
             Battle();
         }
 
@@ -117,14 +67,13 @@ namespace DungeonCrawlerPython
             bool fighting = true;
 
 
-            Monster m = new Monster();
-            m.Init(10, 50);
+            Enemies.Enemy m = new Enemies.Enemy();
 
             while (fighting)
             {
                 Console.Clear();
-                Console.WriteLine("You have " + p.health + " health");
-                Console.WriteLine("The monster has " + m.health + " health");
+                Console.WriteLine("You have " + p.Health + " health");
+                Console.WriteLine("The " + m.EnemyType + " has " + m.Health + " health");
                 Console.WriteLine("1. Attack\n2. Flee");
 
                 string input = Console.ReadLine();
@@ -142,7 +91,7 @@ namespace DungeonCrawlerPython
                         break;
                 }
 
-                if (m.health <= 0 && flee != true)
+                if (m.Health <= 0 && flee != true)
                 {
                     Console.WriteLine("You have beaten the monster and everyone is happy");
                     fighting = false;
@@ -150,7 +99,7 @@ namespace DungeonCrawlerPython
                 else if (flee != true)
                 {
                     p.TakeDamage(m.Attack());
-                    if (p.health <= 0)
+                    if (p.Health <= 0)
                     {
                         GameOver();
                         fighting = false;
