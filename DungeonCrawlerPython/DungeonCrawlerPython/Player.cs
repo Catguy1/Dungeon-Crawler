@@ -84,7 +84,7 @@ namespace DungeonCrawlerPython
             {
                 Health -= damage;
             }
-            Health += armor.Ability();
+            Heal(armor.Ability());
         }
 
         public void Heal(int healAmount)
