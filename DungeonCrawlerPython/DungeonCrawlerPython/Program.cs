@@ -10,7 +10,7 @@ namespace DungeonCrawlerPython
 {
     class Program
     {
-        static Player p = new Player(100);
+        static Player p = new Player();
         static bool playing = true;
 
         static void Main(string[] args)

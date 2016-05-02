@@ -3,17 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonCrawlerPython.Armors;
 using DungeonCrawlerPython.Weapons;
 
 namespace DungeonCrawlerPython
 {
     class Player
     {
-        int maxHealth;
         int health;
         bool blocking;
         int blockAmount;
+        
         Weapons.Weapon weapon;
+        Armors.Armor armor;
+        
+        public Weapon Weapon
+        {
+            get
+            {
+                return weapon;
+            }
+
+            set
+            {
+                weapon = value;
+            }
+        }
+
+        public Armor Armor
+        {
+            get
+            {
+                return armor;
+            }
+
+            set
+            {
+                armor = value;
+            }
+        }
 
         public int Health
         {
@@ -28,25 +56,11 @@ namespace DungeonCrawlerPython
             }
         }
 
-        public Weapon Weapon
+        public Player()
         {
-            get
-            {
-                return weapon;
-            }
-
-            set
-            {
-                weapon = value;
-            }
-        }
-
-        public Player(int health)
-        {
-            this.maxHealth = health;
-            this.health = maxHealth;
-
             weapon = new Weapons.Weapon();
+            armor = new Armors.Armor();
+            this.Health = armor.Health;
         }
 
         public int Attack()
@@ -64,21 +78,22 @@ namespace DungeonCrawlerPython
         {
             if (blocking && blockAmount < damage)
             {
-                health -= (damage - blockAmount);
+                Health -= (damage - blockAmount);
             }
             else if (!blocking)
             {
-                health -= damage;
+                Health -= damage;
             }
+            Health += armor.Ability();
         }
 
         public void Heal(int healAmount)
-        {
-            health += healAmount;
+        {            
+            Health += healAmount;
 
-            if (health > maxHealth)
+            if (Health > armor.Health)
             {
-                health = maxHealth;
+                Health = armor.Health;
             }
         }
     }
