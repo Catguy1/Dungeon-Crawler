@@ -1,1 +1,2 @@
 C:\Users\frede_000\Desktop\Snake\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\DungeonCrawlerPython.exe.config
+C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPython\bin\Debug\DungeonCrawlerPython.exe.config
