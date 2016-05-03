@@ -50,7 +50,7 @@ namespace DungeonCrawlerPython.Shields
 
             scope = eng.CreateScope();
 
-            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Shields\", "*.py");
+            string[] files = Directory.GetFiles(@"PythonScripts\Shields\", "*.py");
 
             int e = rnd.Next(files.Length);
 

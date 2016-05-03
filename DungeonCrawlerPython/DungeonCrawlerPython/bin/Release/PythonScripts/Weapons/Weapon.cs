@@ -8,32 +8,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonCrawlerPython.Armors
+namespace DungeonCrawlerPython.Weapons
 {
-    class Armor
+    class Weapon
     {
         dynamic scope;
         dynamic pFunc;
 
-        public int Health
+        public int Damage
         {
             get
             {
-                pFunc = scope.GetVariable("GetHealth");
+                pFunc = scope.GetVariable("GetDamage");
                 return pFunc(scope);
             }
         }
 
-        public int HealValue
+        public string WeaponType
         {
             get
             {
-                pFunc = scope.GetVariable("GetHealing");
+                pFunc = scope.GetVariable("GetName");
                 return pFunc(scope);
             }
         }
 
-        public Armor(int level)
+        public Weapon(int level)
         {
             LoadRandomFile();
 
@@ -59,17 +59,31 @@ namespace DungeonCrawlerPython.Armors
 
             scope = eng.CreateScope();
 
-            string[] files = Directory.GetFiles(@"PythonScripts\Armors\", "*.py");
+            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Weapons\", "*.py");
 
             int e = rnd.Next(files.Length);
 
             eng.ExecuteFile(files[e], scope);
         }
 
-        public int Ability()
+        public int Attack()
         {
-            pFunc = scope.GetVariable("Ability");
+            pFunc = scope.GetVariable("Attack");
             return pFunc(scope);
+        }
+
+        public void Blocking()
+        {
+            try
+            {
+                pFunc = scope.GetVariable("SetWindup");
+                pFunc(scope, false);
+
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -59,7 +59,7 @@ namespace DungeonCrawlerPython.Weapons
 
             scope = eng.CreateScope();
 
-            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Weapons\", "*.py");
+            string[] files = Directory.GetFiles(@"PythonScripts\Weapons\", "*.py");
 
             int e = rnd.Next(files.Length);
 

@@ -54,8 +54,6 @@ namespace DungeonCrawlerPython
                         break;
                 }
             }
-
-            Console.ReadKey();
         }
 
         static void Initialize()
@@ -225,10 +223,10 @@ namespace DungeonCrawlerPython
                 dynamic scope = eng.CreateScope();
 
                 List<string> m_searchPaths = new List<string>();
-                m_searchPaths.Add(@"..\..\Lib");
+                m_searchPaths.Add(@"PythonScripts");
                 eng.SetSearchPaths(m_searchPaths);
 
-                eng.ExecuteFile(@"..\..\PythonScripts\HighScore_Script.py", scope);
+                eng.ExecuteFile(@"PythonScripts\HighScore_Script.py", scope);
 
                 dynamic pFunc = scope.GetVariable("Add");
 
@@ -249,10 +247,10 @@ namespace DungeonCrawlerPython
                 dynamic scope = eng.CreateScope();
 
                 List<string> m_searchPaths = new List<string>();
-                m_searchPaths.Add(@"..\..\Lib");
+                m_searchPaths.Add(@"PythonScripts");
                 eng.SetSearchPaths(m_searchPaths);
 
-                eng.ExecuteFile(@"..\..\PythonScripts\HighScore_Script.py", scope);
+                eng.ExecuteFile(@"PythonScripts\HighScore_Script.py", scope);
 
                 dynamic pFunc = scope.GetVariable("Read");
 

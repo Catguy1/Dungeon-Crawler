@@ -107,7 +107,7 @@ namespace DungeonCrawlerPython.Enemies
 
                 scope = eng.CreateScope();
 
-                string[] files = Directory.GetFiles(@"PythonScripts\Enemies\", "*.py");
+                string[] files = Directory.GetFiles(@"..\..\PythonScripts\Enemies\", "*.py");
 
                 int e = rnd.Next(files.Length);
 
