@@ -29,8 +29,15 @@ namespace DungeonCrawlerPython
             {
                 Console.Clear();
 
-                Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Weapon.Damage, p.Health));
+                Console.WriteLine("-----------------------------------------------------");
+                Console.WriteLine(string.Format("You are level {0}\nYour weapon is a {1} and gives {2} damage\nYour armor gives you {3} health and heals you {4} per turn\nYour shield can block {5} damage",
+                    p.Level, p.Weapon.WeaponType, p.Weapon.Damage, p.Armor.Health, p.Armor.HealValue, p.Shield.BlockValue));
+
+
+                Console.WriteLine(string.Format("You have {0} health", p.Health));
+
                 Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
+                Console.WriteLine("-----------------------------------------------------");
 
                 string input = Console.ReadLine();
 
@@ -69,7 +76,7 @@ namespace DungeonCrawlerPython
             switch (result)
             {
                 case 0:
-                    Shield s = new Shield();
+                    Shield s = new Shield(p.Level);
 
                     Console.WriteLine("You have found a new shield\nIt can block {0} damage", s.BlockValue);
                     Console.WriteLine("Your own shield blocks {0} damage\nWould you like to replace it?", p.Shield.BlockValue);
@@ -82,10 +89,10 @@ namespace DungeonCrawlerPython
                     break;
 
                 case 1:
-                    Weapon w = new Weapon();
+                    Weapon w = new Weapon(p.Level);
 
-                    Console.WriteLine("You have found a new weapon\nIt does {0} damage", w.Damage);
-                    Console.WriteLine("Your own weapon does {0} damage\nWould you like to replace it?", p.Weapon.Damage);
+                    Console.WriteLine("You have found a new {0}\nIt does {1} damage", w.WeaponType, w.Damage);
+                    Console.WriteLine("Your own {0} does {1} damage\nWould you like to replace it?", p.Weapon.WeaponType, p.Weapon.Damage);
 
                     if (YesNo())
                     {
@@ -95,7 +102,7 @@ namespace DungeonCrawlerPython
                     break;
 
                 case 2:
-                    Armor a = new Armor();
+                    Armor a = new Armor(p.Level);
 
                     Console.WriteLine("You have found a new armour\nIt gives {0} health and heals {1} per turn", a.Health, a.HealValue);
                     Console.WriteLine("Your own armor gives {0} health and heals {1} per turn\nWould you like to replace it?", p.Armor.Health, p.Armor.HealValue);
@@ -123,7 +130,7 @@ namespace DungeonCrawlerPython
             bool flee = false;
             bool fighting = true;
 
-            Enemies.Enemy m = new Enemies.Enemy();
+            Enemy m = new Enemy(p.Level);
 
             Console.Clear();
 

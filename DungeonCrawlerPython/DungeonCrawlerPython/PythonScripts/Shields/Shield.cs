@@ -24,13 +24,13 @@ namespace DungeonCrawlerPython.Shields
             }
         }
 
-        public Shield()
+        public Shield(int level)
         {
             LoadRandomFile();
 
             pFunc = scope.GetVariable("Initialize");
 
-            pFunc(scope, 10);
+            pFunc(scope, level);
         }
 
         private void LoadFile(string dest)

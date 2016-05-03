@@ -101,13 +101,13 @@ namespace DungeonCrawlerPython
 
         public Player()
         {
-            weapon = new Weapon();
-            armor = new Armor();
-            shield = new Shield();
-            this.Health = armor.Health;
-
             level = 1;
             exp = 0;
+
+            weapon = new Weapon(level);
+            armor = new Armor(level);
+            shield = new Shield(level);
+            this.Health = armor.Health;
         }
 
         public int Attack()
@@ -118,6 +118,7 @@ namespace DungeonCrawlerPython
 
         public void Block()
         {
+            weapon.Blocking();
             blocking = true;
         }
 
@@ -147,10 +148,10 @@ namespace DungeonCrawlerPython
         public void Leveling(int earned)
         {
             exp += earned;
-            if (exp <= level*100)
+            if (exp >= level * 100)
             {
-                exp -= level*100;
-                level++;                
+                exp -= level * 100;
+                level++;
             }
         }
     }

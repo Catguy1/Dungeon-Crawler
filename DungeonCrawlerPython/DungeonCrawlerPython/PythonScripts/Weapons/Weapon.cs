@@ -71,5 +71,19 @@ namespace DungeonCrawlerPython.Weapons
             pFunc = scope.GetVariable("Attack");
             return pFunc(scope);
         }
+
+        public void Blocking()
+        {
+            try
+            {
+                pFunc = scope.GetVariable("SetWindup");
+                pFunc(scope, false);
+
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

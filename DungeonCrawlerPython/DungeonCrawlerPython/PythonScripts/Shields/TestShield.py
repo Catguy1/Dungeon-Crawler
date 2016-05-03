@@ -2,10 +2,10 @@ from System import Console
 from System import Random
 
 #Used for creating the weapon
-def Initialize(self, damage):
+def Initialize(self, level):
     rnd = Random()
     self._name = "TestShield"
-    self._block = rnd.Next(5,15)
+    self._block = rnd.Next(5,15) * level
 
 def GetName(self):
     return self._name

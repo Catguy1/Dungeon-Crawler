@@ -1,11 +1,11 @@
 from System import Console
 #Used for creating the enemy
-def Initialize(self):
+def Initialize(self, level):
     self._name = "Heavy enemy"
-    self._health = 150
-    self._damage = 25
+    self._health = 150 * level
+    self._damage = 25 * level
     self._windup = True
-    self._exp = 25
+    self._exp = 25 * level
 
 #Gets the name of the enemy
 def GetName(self):

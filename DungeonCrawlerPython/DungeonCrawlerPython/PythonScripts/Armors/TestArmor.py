@@ -2,11 +2,11 @@ from System import Console
 from System import Random
 
 #Used for creating the weapon
-def Initialize(self, health):
+def Initialize(self, level):
     rnd = Random()
     self._name = "TestArmor"
-    self._health = rnd.Next(100,250)
-    self._heal = 5
+    self._health = rnd.Next(100,150) * level
+    self._heal = rnd.Next(5,10) * level
 
 def GetName(self):
     return self._name

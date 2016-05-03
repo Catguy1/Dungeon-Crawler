@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PythonScripts\Armors\TestArmor.py" />
+    <Content Include="PythonScripts\Enemies\FastEnemy.py" />
     <Content Include="PythonScripts\Enemies\EnemyBaseClass.py" />
     <Content Include="Lib\abc.py" />
     <Content Include="Lib\aifc.py" />

@@ -14,6 +14,12 @@ def GetName(self):
 def GetDamage(self):
     return self._damage
 
+def GetWindup(self):
+    return self._windup
+
+def SetWindup(self, value):
+    self._windup = value;
+
 def Attack(self):
     if(self._windup):
         Console.WriteLine("You swing your {0} and deal {1} damage",self._name,self._damage)
@@ -22,4 +28,4 @@ def Attack(self):
     else:
         self._windup = True
         Console.WriteLine("You ready your {0}", self._name)
-        return 0
+        return 0;

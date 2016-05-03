@@ -19,7 +19,6 @@ namespace DungeonCrawlerPython.Enemies
 
         int health;
         int damage;
-        int exp;
 
         public string EnemyType
         {
@@ -60,12 +59,12 @@ namespace DungeonCrawlerPython.Enemies
         /// <summary>
         /// Generates a random enemy from the enemies folder
         /// </summary>
-        public Enemy()
+        public Enemy(int level)
         {
             LoadRandomFile();
 
             pFunc = scope.GetVariable("Initialize");
-            pFunc(scope);
+            pFunc(scope, level);
         }
 
         /// <summary>
