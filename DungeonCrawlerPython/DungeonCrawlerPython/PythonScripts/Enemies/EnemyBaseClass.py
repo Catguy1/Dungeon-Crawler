@@ -4,6 +4,7 @@ def Initialize(self):
     self._name = "Generic enemy"
     self._health = 100
     self._damage = 10
+    self._exp = 15
 
 #Gets the name of the enemy
 def GetName(self):
@@ -16,6 +17,10 @@ def GetDamage(self):
 #Gets the health of the enemy
 def GetHealth(self):
     return self._health
+
+#Gets the exp of the enemy
+def GetExp(self):
+    return self._exp
 
 #Attack function called during the enemy's turn during the combat phase
 def Attack(self):

@@ -19,6 +19,7 @@ namespace DungeonCrawlerPython.Enemies
 
         int health;
         int damage;
+        int exp;
 
         public string EnemyType
         {
@@ -43,6 +44,15 @@ namespace DungeonCrawlerPython.Enemies
             get
             {
                 pFunc = scope.GetVariable("GetDamage");
+                return damage = pFunc(scope);
+            }
+        }
+
+        public int Exp
+        {
+            get
+            {
+                pFunc = scope.GetVariable("GetExp");
                 return damage = pFunc(scope);
             }
         }

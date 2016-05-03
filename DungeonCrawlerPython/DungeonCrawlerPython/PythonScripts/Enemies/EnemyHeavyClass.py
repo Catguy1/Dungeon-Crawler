@@ -5,6 +5,7 @@ def Initialize(self):
     self._health = 150
     self._damage = 25
     self._windup = True
+    self._exp = 25
 
 #Gets the name of the enemy
 def GetName(self):
@@ -17,6 +18,10 @@ def GetDamage(self):
 #Gets the health of the enemy
 def GetHealth(self):
     return self._health
+
+#Gets the exp of the enemy
+def GetExp(self):
+    return self._exp
 
 #Attack function called during the enemy's turn during the combat phase
 def Attack(self):

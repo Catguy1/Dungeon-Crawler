@@ -143,5 +143,15 @@ namespace DungeonCrawlerPython
                 Health = armor.Health;
             }
         }
+
+        public void Leveling(int earned)
+        {
+            exp += earned;
+            if (exp <= level*100)
+            {
+                exp -= level*100;
+                level++;                
+            }
+        }
     }
 }

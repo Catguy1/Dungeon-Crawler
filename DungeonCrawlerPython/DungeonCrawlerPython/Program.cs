@@ -160,6 +160,7 @@ namespace DungeonCrawlerPython
                 {
                     Console.WriteLine("You have beaten the monster and everyone is happy");
                     points += 5;
+                    p.Leveling(m.Exp);
                     fighting = false;
                 }
                 else if (flee != true)
