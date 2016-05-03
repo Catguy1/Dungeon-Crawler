@@ -1,6 +1,5 @@
 from System import Console
 from System import Random
-
 #Used for creating the weapon
 def Initialize(self, level):
     rnd = Random()
