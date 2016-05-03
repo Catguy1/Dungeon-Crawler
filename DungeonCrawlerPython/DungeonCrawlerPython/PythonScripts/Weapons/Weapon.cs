@@ -24,6 +24,15 @@ namespace DungeonCrawlerPython.Weapons
             }
         }
 
+        public string WeaponType
+        {
+            get
+            {
+                pFunc = scope.GetVariable("GetName");
+                return pFunc(scope);
+            }
+        }
+
         public Weapon()
         {
             LoadRandomFile();

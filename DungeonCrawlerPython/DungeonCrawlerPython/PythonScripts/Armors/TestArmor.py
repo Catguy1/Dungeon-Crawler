@@ -14,6 +14,9 @@ def GetName(self):
 def GetHealth(self):
     return self._health
 
+def GetHealing(self):
+    return self._heal
+
 def Ability(self):
     Console.WriteLine("Your {0} heals you and you gain gain {1} health",self._name,self._heal)
     return self._heal

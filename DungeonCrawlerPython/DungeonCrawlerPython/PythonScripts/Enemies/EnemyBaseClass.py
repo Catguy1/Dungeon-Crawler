@@ -1,4 +1,4 @@
-
+from System import Console
 #Used for creating the enemy
 def Initialize(self):
     self._name = "Generic enemy"
@@ -19,6 +19,7 @@ def GetHealth(self):
 
 #Attack function called during the enemy's turn during the combat phase
 def Attack(self):
+    Console.WriteLine("The enemy attacks for {0} damage", self._damage)
     return self._damage 
 
 #Called when the player attacks the enemy

@@ -1,4 +1,4 @@
-
+from System import Console
 #Used for creating the enemy
 def Initialize(self):
     self._name = "Heavy enemy"
@@ -22,6 +22,7 @@ def GetHealth(self):
 def Attack(self):
     if self._windup == False:
         self._windup = True
+        Console.WriteLine("The enemy attacks for {0} damage", self._damage)
         return self._damage
     else:
         print("The enemy is winding up!")

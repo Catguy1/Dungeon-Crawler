@@ -42,3 +42,4 @@ C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPyth
 C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPython\obj\Debug\DungeonCrawlerPython.csprojResolveAssemblyReference.cache
 C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPython\obj\Debug\DungeonCrawlerPython.exe
 C:\Users\Esben\Documents\Dungeon-Crawler\DungeonCrawlerPython\DungeonCrawlerPython\obj\Debug\DungeonCrawlerPython.pdb
+C:\Users\frede_000\Desktop\DungeonCrawler\DungeonCrawlerPython\DungeonCrawlerPython\obj\Debug\DungeonCrawlerPython.csprojResolveAssemblyReference.cache

@@ -15,13 +15,20 @@ namespace DungeonCrawlerPython.Armors
         dynamic scope;
         dynamic pFunc;
 
-        int health;
-
         public int Health
         {
             get
             {
                 pFunc = scope.GetVariable("GetHealth");
+                return pFunc(scope);
+            }
+        }
+
+        public int HealValue
+        {
+            get
+            {
+                pFunc = scope.GetVariable("GetHealing");
                 return pFunc(scope);
             }
         }

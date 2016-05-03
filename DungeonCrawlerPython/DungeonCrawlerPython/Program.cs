@@ -4,7 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IronPython.Hosting;
+using IronPython.Modules;
+using IronPython.SQLite;
 using Microsoft.Scripting.Hosting;
+using DungeonCrawlerPython.Weapons;
+using DungeonCrawlerPython.Armors;
+using DungeonCrawlerPython.Enemies;
+using DungeonCrawlerPython.Shields;
 
 namespace DungeonCrawlerPython
 {
@@ -13,8 +19,12 @@ namespace DungeonCrawlerPython
         static Player p;
         static bool playing = true;
 
+        static int points;
+
         static void Main(string[] args)
         {
+            Initialize();
+
             while (playing)
             {
                 Console.Clear();
@@ -44,14 +54,63 @@ namespace DungeonCrawlerPython
         static void Initialize()
         {
             p = new Player();
+            points = 0;
         }
 
         static void Search()
         {
+            Random rnd = new Random();
+
+            int result = rnd.Next(4);
+
             Console.Clear();
             Console.WriteLine("Searching");
 
-            Battle();
+            switch (result)
+            {
+                case 0:
+                    Shield s = new Shield();
+
+                    Console.WriteLine("You have found a new shield\nIt can block {0} damage", s.BlockValue);
+                    Console.WriteLine("Your own shield blocks {0} damage\nWould you like to replace it?", p.Shield.BlockValue);
+
+                    if (YesNo())
+                    {
+                        p.Shield = s;
+                    }
+
+                    break;
+
+                case 1:
+                    Weapon w = new Weapon();
+
+                    Console.WriteLine("You have found a new weapon\nIt does {0} damage", w.Damage);
+                    Console.WriteLine("Your own weapon does {0} damage\nWould you like to replace it?", p.Weapon.Damage);
+
+                    if (YesNo())
+                    {
+                        p.Weapon = w;
+                    }
+
+                    break;
+
+                case 2:
+                    Armor a = new Armor();
+
+                    Console.WriteLine("You have found a new armour\nIt gives {0} health and heals {1} per turn", a.Health, a.HealValue);
+                    Console.WriteLine("Your own armor gives {0} health and heals {1} per turn\nWould you like to replace it?", p.Armor.Health, p.Armor.HealValue);
+
+                    if (YesNo())
+                    {
+                        p.Armor = a;
+                    }
+
+                    break;
+
+                case 3:
+                    Battle();
+                    break;
+            }
         }
 
         static void Rest()
@@ -70,9 +129,11 @@ namespace DungeonCrawlerPython
 
             while (fighting)
             {
-                Console.WriteLine("\nYou have " + p.Health + " health");
+                Console.WriteLine("-----------------------------------------------------");
+                Console.WriteLine("You have " + p.Health + " health");
                 Console.WriteLine("The " + m.EnemyType + " has " + m.Health + " health");
                 Console.WriteLine("1. Attack\n2. Block\n3. Flee");
+                Console.WriteLine("-----------------------------------------------------");
 
                 string input = Console.ReadLine();
 
@@ -98,6 +159,7 @@ namespace DungeonCrawlerPython
                 if (m.Health <= 0 && flee != true)
                 {
                     Console.WriteLine("You have beaten the monster and everyone is happy");
+                    points += 5;
                     fighting = false;
                 }
                 else if (flee != true)
@@ -121,7 +183,103 @@ namespace DungeonCrawlerPython
         static void GameOver()
         {
             Console.WriteLine("You have lost and everyone is sad, except the monsters, they're happy, they're having a picnic right now, everything is good in monsterland");
-            playing = false;
+
+            Console.WriteLine("\nPlease enter your name");
+
+            string input = Console.ReadLine();
+
+            AddHighscore(input, points);
+
+            Console.Clear();
+
+            PrintHighscore();
+
+            Console.WriteLine("\nWould you like to play again?");
+
+            bool choice = YesNo();
+
+            if (choice)
+            {
+                Initialize();
+            }
+            else if (!choice)
+            {
+                playing = false;
+            }
+        }
+
+        static void AddHighscore(string name, int points)
+        {
+            try
+            {
+                ScriptEngine eng = Python.CreateEngine();
+
+                dynamic scope = eng.CreateScope();
+
+                List<string> m_searchPaths = new List<string>();
+                m_searchPaths.Add(@"..\..\Lib");
+                eng.SetSearchPaths(m_searchPaths);
+
+                eng.ExecuteFile(@"..\..\PythonScripts\HighScore_Script.py", scope);
+
+                dynamic pFunc = scope.GetVariable("Add");
+
+                pFunc(name, points, DateTime.Now.ToString());
+            }
+            catch
+            {
+                Console.WriteLine("Failed to load or call the add function of the database script");
+            }
+        }
+
+        static void PrintHighscore()
+        {
+            try
+            {
+                ScriptEngine eng = Python.CreateEngine();
+
+                dynamic scope = eng.CreateScope();
+
+                List<string> m_searchPaths = new List<string>();
+                m_searchPaths.Add(@"..\..\Lib");
+                eng.SetSearchPaths(m_searchPaths);
+
+                eng.ExecuteFile(@"..\..\PythonScripts\HighScore_Script.py", scope);
+
+                dynamic pFunc = scope.GetVariable("Read");
+
+                pFunc();
+            }
+            catch
+            {
+                Console.WriteLine("Failed to load or call the read function of the database script");
+            }
+        }
+
+        static bool YesNo()
+        {
+            bool choosing = true;
+            Console.WriteLine("1.Yes\n2.No");
+            while (choosing)
+            {
+                string input = Console.ReadLine();
+
+                switch (input.ToLower())
+                {
+                    case "1":
+                    case "yes":
+                        return true;
+
+                    case "2":
+                    case "no":
+                        return false;
+
+                    default:
+                        Console.WriteLine("Invalid input try again");
+                        break;
+                }
+            }
+            return false;
         }
     }
 }

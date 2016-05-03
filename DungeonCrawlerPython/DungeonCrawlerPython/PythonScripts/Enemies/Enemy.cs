@@ -72,30 +72,44 @@ namespace DungeonCrawlerPython.Enemies
 
         private void LoadFile(string dest)
         {
-            ScriptEngine eng = Python.CreateEngine();
+            try
+            {
+                ScriptEngine eng = Python.CreateEngine();
 
-            scope = eng.CreateScope();
+                scope = eng.CreateScope();
 
-            eng.ExecuteFile(dest, scope);
+                eng.ExecuteFile(dest, scope);
 
-            pFunc = scope.GetVariable("Initialize");
+                pFunc = scope.GetVariable("Initialize");
+            }
+            catch
+            {
+                Console.WriteLine("Failed to load the script at the destination");
+            }
         }
 
         private void LoadRandomFile()
         {
-            Random rnd = new Random();
+            try
+            {
+                Random rnd = new Random();
 
-            ScriptEngine eng = Python.CreateEngine();
+                ScriptEngine eng = Python.CreateEngine();
 
-            scope = eng.CreateScope();
+                scope = eng.CreateScope();
 
-            string[] files = Directory.GetFiles(@"..\..\PythonScripts\Enemies\", "*.py");
+                string[] files = Directory.GetFiles(@"..\..\PythonScripts\Enemies\", "*.py");
 
-            int e = rnd.Next(files.Length);
+                int e = rnd.Next(files.Length);
 
-            eng.ExecuteFile(files[e], scope);
+                eng.ExecuteFile(files[e], scope);
 
-            pFunc = scope.GetVariable("Initialize");
+                pFunc = scope.GetVariable("Initialize");
+            }
+            catch
+            {
+                Console.WriteLine("Failed to load a new enemy");
+            }
         }
 
         public int Attack()

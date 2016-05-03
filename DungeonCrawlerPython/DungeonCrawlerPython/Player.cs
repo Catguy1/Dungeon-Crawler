@@ -84,6 +84,19 @@ namespace DungeonCrawlerPython
                 exp = value;
             }
         }
+
+        public Shield Shield
+        {
+            get
+            {
+                return shield;
+            }
+
+            set
+            {
+                shield = value;
+            }
+        }
         #endregion
 
         public Player()
