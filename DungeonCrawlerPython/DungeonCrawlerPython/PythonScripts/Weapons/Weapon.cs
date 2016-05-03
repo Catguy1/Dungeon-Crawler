@@ -33,13 +33,13 @@ namespace DungeonCrawlerPython.Weapons
             }
         }
 
-        public Weapon()
+        public Weapon(int level)
         {
             LoadRandomFile();
 
             pFunc = scope.GetVariable("Initialize");
 
-            pFunc(scope, 10);
+            pFunc(scope, level);
         }
 
         private void LoadFile(string dest)
