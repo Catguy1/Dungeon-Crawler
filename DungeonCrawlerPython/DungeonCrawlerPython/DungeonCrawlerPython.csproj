@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Player.cs" />
+    <Compile Include="PythonScripts\Armors\Armor.cs" />
     <Compile Include="PythonScripts\Enemies\Enemy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +90,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PythonScripts\Armors\TestArmor.py" />
     <Content Include="PythonScripts\Enemies\EnemyBaseClass.py" />
     <Content Include="Lib\abc.py" />
     <Content Include="Lib\aifc.py" />
@@ -602,6 +604,7 @@
     <Content Include="PythonScripts\Enemies\EnemyHeavyClass.py" />
     <Content Include="PythonScripts\HighScore_Script.py" />
     <Content Include="PythonScripts\Shields\TestShield.py" />
+    <Content Include="PythonScripts\Weapons\TestDagger.py" />
     <Content Include="PythonScripts\Weapons\TestWeapon.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,18 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using DungeonCrawlerPython.Armors;
 using DungeonCrawlerPython.Weapons;
+using DungeonCrawlerPython.Shields;
 
 namespace DungeonCrawlerPython
 {
     class Player
     {
+        #region properties
         int health;
         bool blocking;
-        int blockAmount;
-        
-        Weapons.Weapon weapon;
-        Armors.Armor armor;
-        
+
+        int level;
+
+        int exp;
+
+        Weapon weapon;
+        Shield shield;
+        Armor armor;
+        #endregion
+
+        #region fields
         public Weapon Weapon
         {
             get
@@ -56,11 +64,37 @@ namespace DungeonCrawlerPython
             }
         }
 
+        public int Level
+        {
+            get
+            {
+                return level;
+            }
+        }
+
+        public int Exp
+        {
+            get
+            {
+                return exp;
+            }
+
+            set
+            {
+                exp = value;
+            }
+        }
+        #endregion
+
         public Player()
         {
-            weapon = new Weapons.Weapon();
-            armor = new Armors.Armor();
+            weapon = new Weapon();
+            armor = new Armor();
+            shield = new Shield();
             this.Health = armor.Health;
+
+            level = 1;
+            exp = 0;
         }
 
         public int Attack()
@@ -76,9 +110,9 @@ namespace DungeonCrawlerPython
 
         public void TakeDamage(int damage)
         {
-            if (blocking && blockAmount < damage)
+            if (blocking)
             {
-                Health -= (damage - blockAmount);
+                Health -= shield.Block(damage);
             }
             else if (!blocking)
             {
@@ -88,7 +122,7 @@ namespace DungeonCrawlerPython
         }
 
         public void Heal(int healAmount)
-        {            
+        {
             Health += healAmount;
 
             if (Health > armor.Health)

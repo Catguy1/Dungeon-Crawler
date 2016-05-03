@@ -10,21 +10,14 @@ namespace DungeonCrawlerPython
 {
     class Program
     {
-        static Player p = new Player();
+        static Player p;
         static bool playing = true;
 
         static void Main(string[] args)
         {
-
-            //Enemies.Enemy e = new Enemies.Enemy();
-
-            //Console.WriteLine("In front of you stands a {0}\nIt has {1} health and {2} attack", e.enemyType, e.health, e.damage);
-
             while (playing)
             {
                 Console.Clear();
-
-                Weapons.Weapon w = new Weapons.Weapon();
 
                 Console.WriteLine(string.Format("You have {0} Attack and {1} Health", p.Weapon.Damage, p.Health));
                 Console.WriteLine("What do you want to do?\n1. Search\n2. Rest");
@@ -48,7 +41,10 @@ namespace DungeonCrawlerPython
             Console.ReadKey();
         }
 
-
+        static void Initialize()
+        {
+            p = new Player();
+        }
 
         static void Search()
         {
@@ -70,6 +66,8 @@ namespace DungeonCrawlerPython
 
             Enemies.Enemy m = new Enemies.Enemy();
 
+            Console.Clear();
+
             while (fighting)
             {
                 Console.WriteLine("\nYou have " + p.Health + " health");
@@ -77,6 +75,8 @@ namespace DungeonCrawlerPython
                 Console.WriteLine("1. Attack\n2. Block\n3. Flee");
 
                 string input = Console.ReadLine();
+
+                Console.Clear();
 
                 switch (input.ToLower())
                 {
@@ -94,8 +94,6 @@ namespace DungeonCrawlerPython
                         flee = true;
                         break;
                 }
-
-                Console.Clear();
 
                 if (m.Health <= 0 && flee != true)
                 {
@@ -115,6 +113,8 @@ namespace DungeonCrawlerPython
                 {
                     fighting = false;
                 }
+
+
             }
         }
 
